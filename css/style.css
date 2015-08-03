@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
+#container {
+
+  width: 66.66%; 
+  margin: auto;
+}
+#simSpace {
+
+  display:none;
+}
+#time {
+
+  font-family: 'Open Sans Condensed', 'sans-serif';
+  color: #DDD;
+}
