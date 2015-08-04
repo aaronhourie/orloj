@@ -3,6 +3,11 @@ body {
   padding: 0;
   background-color: #000;
 }
+p {
+
+  font-family: 'Open Sans Condensed', 'sans-serif';
+  color: #DDD;
+}
 #container {
 
   width: 66.66%; 
@@ -12,8 +17,11 @@ body {
 
   display:none;
 }
-#time {
+#fastForward:hover{
 
-  font-family: 'Open Sans Condensed', 'sans-serif';
-  color: #DDD;
+  color: #F00;
+}
+#fastForward:active{
+
+  color: #00F;
 }

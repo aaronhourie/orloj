@@ -1,4 +1,7 @@
+var date = new Date();
 var width = 0;
+var fastForward = false;
+var count = 0;
 
 $(document).ready(function() {
 
@@ -11,10 +14,22 @@ $(document).ready(function() {
   // For that chic, modern look
   $("#simSpace").fadeIn(1000);
 
-  // Updates in real time. Unfortunately it's pretty much impossible to tell.
-  setInterval(drawPlanets, 10);
-});
+  var timer = setInterval(drawPlanets, 10);
 
+  // Sets the fast forward state.
+  $('#fastForward').click(function() {
+
+    if (fastForward) {
+
+      fastForward = false;
+    }
+    else {
+
+      fastForward = true;
+    }
+  });
+
+});
 
 function resizeCanvas() {
 
@@ -27,6 +42,19 @@ function resizeCanvas() {
 }
 
 function drawPlanets(){
+
+  // Keeps track of the seconds so a global date object can be
+  // maintained in real time.
+  count++;
+  if (count >= 99){
+    count = 0;
+    date.setSeconds(date.getSeconds() + 1);
+  }
+
+  if (fastForward) {
+
+    date.setDate(date.getDate() + 1);
+  }
 
   // Updates the clock
   $("#time").text(getTimeString());
@@ -204,7 +232,6 @@ function drawNeptune(canvas, ctx){
  */
 function getAngle(offsetTime, orbitalPeriod){
 
-  var date = new Date();
   // Applies the offset.
   var orbitTime = (date.getTime()-offsetTime) % orbitalPeriod;
   // returns the parameter angle in radians.
@@ -219,7 +246,6 @@ function getAngle(offsetTime, orbitalPeriod){
 
 function getLongAngle(offsetAngle, orbitalPeriod){
 
-  var date = new Date();
   var orbitTime = date.getTime();
   // tacks on the offset angle at the end.
   return (orbitTime * (2*Math.PI / orbitalPeriod)) + offsetAngle;
@@ -228,7 +254,6 @@ function getLongAngle(offsetAngle, orbitalPeriod){
 // Returns a formatted time string.
 function getTimeString(){
 
-  var date = new Date();
   var month = getMonthName(date.getMonth());
   
   return month.concat(" ", date.getDate(), ", ", date.getFullYear(),
@@ -256,3 +281,6 @@ function getMonthName(month){
   }
   return "An error has occured! Please try again later.";
 }
+
+
+
